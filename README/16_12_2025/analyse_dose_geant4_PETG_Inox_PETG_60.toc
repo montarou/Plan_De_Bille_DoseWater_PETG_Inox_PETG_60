@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}\Large \color {blue} \textbf {Configuration de la simulation}\color {black}}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}\color {blue}\textbf {Vue d'Ensemble -- Coupe Longitudinale}\color {black}}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}\color {blue}\textbf {Paramètres géométriques de la simulation}\color {black}}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}\Large \color {blue} \textbf {Résultats de Simulation}\color {black}}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}\color {blue}\textbf {Statistiques de génération}\color {black}}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}\color {blue}\textbf {Méthode 1 : Dépôt d'énergie Monte-Carlo direct}\color {black}}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}\color {blue}\textbf {Méthode 1bis : Forçage d'interaction}\color {black}}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}\color {blue}\textbf {Méthode 2 : Fluence spectrale}\color {black}}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}\color {blue}\textbf {Débits de dose simulés}\color {black}}{5}{subsection.2.5}%
+\contentsline {section}{\numberline {3}\Large \color {blue} \textbf {Analyse de l'Atténuation}\color {black}}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}\color {blue}\textbf {Facteurs d'atténuation par rapport à la théorie sans écran}\color {black}}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}\color {blue}\textbf {Comparaison directe des deux écrans}\color {black}}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}\color {blue}\textbf {Analyse physique}\color {black}}{5}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Pourquoi le sandwich atténue légèrement plus ?}{6}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Bilan pour le spectre Eu-152}{6}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}\color {blue}\textbf {Facteurs d'atténuation par rapport à la théorie sans écran}\color {black}}{6}{subsection.3.4}%
+\contentsline {section}{\numberline {4}\Large \color {blue} \textbf {Synthèse et Conclusions}\color {black}}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}\color {blue}\textbf {Résumé des résultats}\color {black}}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}\color {blue}\textbf {Conclusions}\color {black}}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}\color {blue}\textbf {Recommandations}\color {black}}{7}{subsection.4.3}%

@@ -1,0 +1,724 @@
+\documentclass{article}
+\usepackage[
+  a4paper,
+  left=2cm, right=2cm,
+  top=2cm, bottom=2cm
+]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}       % Équations avancées
+\usepackage{amssymb}       % Symboles mathématiques
+\usepackage{graphicx}      % Inclusion de figures
+\usepackage{siunitx}       % Unités SI
+\usepackage{setspace}
+\singlespacing
+\usepackage{multirow}
+\usepackage{booktabs}      % Tableaux professionnels
+\usepackage[table]{xcolor}
+\usepackage{hyperref}      % Références cliquables
+\usepackage[most]{tcolorbox}
+\usepackage{bm}
+
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{pgfplots}   
+\usepackage{caption}   
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,decorations.pathreplacing,calc,3d,positioning,patterns} % pour "below=of ..." et "-Stealth"
+\usepackage{tikz-3dplot}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{listings}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+\usepackage{pifont}
+
+\newcommand{\codeTight}{\fontsize{8pt}{9pt}\selectfont} 
+
+\captionsetup{font=footnotesize,labelfont=bf,textfont=it,skip=0pt}
+
+% Commandes personnalisées
+\newcommand{\cmark}{\textcolor{successgreen}{\ding{51}}}
+\newcommand{\xmark}{\textcolor{errorred}{\ding{55}}}
+\newcommand{\wmark}{\textcolor{warningorange}{\ding{45}}}
+
+
+% --- Espaces autour des flottants (tables, figures) ---
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{0pt}
+
+% --- Listes pour tout le document ---
+\setlist[itemize]{itemsep=0pt, topsep=2pt, parsep=0pt, partopsep=0pt}
+\setlist[enumerate]{itemsep=0pt, topsep=2pt, parsep=0pt, partopsep=0pt}
+
+% --- Espaces autour des titres ---
+\titlespacing*{\section}
+  {0pt}{2ex plus 1ex minus .2ex}{1ex plus .5ex minus .2ex}
+\titlespacing*{\subsection}
+  {0pt}{1.5ex plus .5ex minus .2ex}{0.7ex plus .3ex minus .1ex}
+
+% --- Espaces autour des formules affichées ---
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\setlength{\abovedisplayshortskip}{4pt}
+\setlength{\belowdisplayshortskip}{4pt}
+
+\definecolor{misty}{rgb}{1.0,0.89,0.88}
+\definecolor{MyBlue}{rgb}{0.8,1.0,1.0}
+\definecolor{Carnelian}{rgb}{0.7,0.11,0.11}
+\definecolor{MyGreen}{rgb}{0.0,0.5,0.0}
+\definecolor{MyGreen2}{rgb}{0.0,0.42,0.24}
+\definecolor{corrigecolor}{RGB}{180,100,200}
+\definecolor{methode1color}{RGB}{220,80,60}
+\definecolor{methode2color}{RGB}{80,180,80}
+\definecolor{lightblue}{RGB}{220,235,255}
+\definecolor{successgreen}{RGB}{39,174,96}
+\definecolor{warningorange}{RGB}{243,156,18}
+\definecolor{errorred}{RGB}{231,76,60}
+\definecolor{infoblue}{RGB}{52,152,219}
+\definecolor{darkblue}{RGB}{44,62,80}
+\definecolor{lightgray}{RGB}{245,245,245}
+\definecolor{purple}{RGB}{142,68,173}
+
+% Configuration des couleurs
+\definecolor{typeA}{RGB}{231,76,60}
+\definecolor{typeB}{RGB}{241,196,15}
+\definecolor{typeC}{RGB}{230,126,34}
+\definecolor{typeD0}{RGB}{155,89,182}
+\definecolor{typeD1}{RGB}{52,152,219}
+\definecolor{typeD2}{RGB}{26,188,156}
+\definecolor{typeD3}{RGB}{46,204,113}
+\definecolor{typeD4}{RGB}{149,165,166}
+
+\definecolor{methode1}{RGB}{70,130,180}
+\definecolor{methode1bis}{RGB}{60,179,113}
+\definecolor{methode2}{RGB}{255,140,0}
+\definecolor{theoriecolor}{RGB}{0,100,180}
+
+% Couleurs
+\definecolor{darkblue}{RGB}{0,51,102}
+\definecolor{lightblue}{RGB}{230,240,250}
+\definecolor{lightgreen}{RGB}{230,250,230}
+\definecolor{lightorange}{RGB}{255,240,220}
+\definecolor{lightred}{RGB}{255,230,230}
+\definecolor{method1}{RGB}{70,130,180}
+\definecolor{method1bis}{RGB}{60,179,113}
+\definecolor{method2}{RGB}{255,140,0}
+
+
+% Couleurs personnalisées
+\definecolor{sourcecolor}{RGB}{255,100,0}
+\definecolor{matrixcolor}{RGB}{255,220,100}
+\definecolor{upstreamcolor}{RGB}{100,100,255}
+\definecolor{downstreamcolor}{RGB}{255,100,100}
+\definecolor{watercolor}{RGB}{100,180,255}
+\definecolor{conecolor}{RGB}{255,200,100}
+\definecolor{aircolor}{RGB}{240,248,255}
+\definecolor{warningcolor}{RGB}{255,150,0}
+\definecolor{energie40}{RGB}{255,100,100}
+\definecolor{energie122}{RGB}{255,150,50}
+\definecolor{energie344}{RGB}{255,200,50}
+\definecolor{energie779}{RGB}{150,200,50}
+\definecolor{energie964}{RGB}{50,200,100}
+\definecolor{energie1408}{RGB}{50,150,200}
+
+% Couleurs personnalisées
+\definecolor{airblue}{RGB}{135,206,250}
+\definecolor{sourcemagenta}{RGB}{255,0,255}
+\definecolor{conecolor}{RGB}{255,200,0}
+\definecolor{kermacolor}{RGB}{0,255,255}
+\definecolor{upstreamblue}{RGB}{0,0,255}
+\definecolor{downstreamred}{RGB}{255,0,0}
+\definecolor{slabcolor}{RGB}{255,255,0}
+\definecolor{plaquecolor}{RGB}{100,200,100}
+\definecolor{cone60color}{RGB}{100,200,100}
+\definecolor{cone7color}{RGB}{255,150,150}
+
+
+% Couleurs personnalisées
+\definecolor{sourcecolor}{RGB}{255,100,100}
+\definecolor{slabcolor}{RGB}{255,230,100}
+\definecolor{upstreamcolor}{RGB}{100,150,255}
+\definecolor{downstreamcolor}{RGB}{255,100,100}
+\definecolor{kermacolor}{RGB}{100,255,255}
+\definecolor{aircolor}{RGB}{220,240,255}
+\definecolor{conecolor}{RGB}{255,200,150}
+\definecolor{worldcolor}{RGB}{240,240,240}
+\definecolor{envelopecolor}{RGB}{200,220,255}
+
+\definecolor{transmitcolor}{RGB}{46,204,113}
+\definecolor{absorbcolor}{RGB}{231,76,60}
+\definecolor{scattercolor}{RGB}{241,196,15}
+\definecolor{oldcolor}{RGB}{180,180,180}
+
+% Couleurs personnalisées
+\definecolor{aircolor}{RGB}{200,230,255}
+\definecolor{watercolor}{RGB}{100,150,255}
+\definecolor{sourcecolor}{RGB}{255,80,80}
+\definecolor{detectorcolor}{RGB}{100,200,100}
+\definecolor{conecolor}{RGB}{255,180,100}
+\definecolor{cone7color}{RGB}{100,200,255}
+\definecolor{envelopecolor}{RGB}{230,230,230}
+\definecolor{upstreamcolor}{RGB}{80,80,255}
+\definecolor{downstreamcolor}{RGB}{255,80,80}
+\definecolor{gammacolor}{RGB}{255,200,0}
+
+% Couleurs
+\definecolor{spherecolor}{RGB}{100,150,255}
+\definecolor{raycolor}{RGB}{255,100,100}
+\definecolor{chordcolor}{RGB}{50,200,50}
+\definecolor{centercolor}{RGB}{0,0,0}
+\definecolor{pointcolor}{RGB}{200,50,50}
+
+\definecolor{wpetg}{RGB}{34,139,34}      % Vert forêt pour W/PETG
+\definecolor{inox}{RGB}{192,192,192}     % Gris argent pour Inox
+\definecolor{water}{RGB}{100,149,237}    % Bleu pour eau
+\definecolor{source}{RGB}{255,215,0}     % Or pour source
+\definecolor{gamma}{RGB}{255,69,0}       % Orange-rouge pour gammas
+
+
+% Boîtes colorées
+\newtcolorbox{databox}[1]{
+    colback=blue!5,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    title=#1
+}
+
+\newtcolorbox{resultbox}[1]{
+    colback=green!5,
+    colframe=green!75!black,
+    fonttitle=\bfseries,
+    title=#1
+}
+
+\newtcolorbox{warningbox}[1]{
+    colback=orange!5,
+    colframe=orange!75!black,
+    fonttitle=\bfseries,
+    title=#1
+}
+
+% --- Espaces autour des flottants (tables, figures) ---
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{0pt}
+
+% --- Listes pour tout le document ---
+\setlist[itemize]{itemsep=0pt, topsep=2pt, parsep=0pt, partopsep=0pt}
+\setlist[enumerate]{itemsep=0pt, topsep=2pt, parsep=0pt, partopsep=0pt}
+
+% --- Espaces autour des titres ---
+\titlespacing*{\section}
+  {0pt}{2ex plus 1ex minus .2ex}{1ex plus .5ex minus .2ex}
+\titlespacing*{\subsection}
+  {0pt}{1.5ex plus .5ex minus .2ex}{0.7ex plus .3ex minus .1ex}
+
+% --- Espaces autour des formules affichées ---
+\setlength{\abovedisplayskip}{6pt}
+\setlength{\belowdisplayskip}{6pt}
+\setlength{\abovedisplayshortskip}{4pt}
+\setlength{\belowdisplayshortskip}{4pt}
+
+\title{
+\vspace{-1cm}
+{\color{blue}\rule{\linewidth}{2pt}}\\[0.5cm]
+{\Huge\bfseries Simulation Monte Carlo Geant4}\\[0.3cm]
+{\Large Effet d'une Plaque W/PETG sur le Débit de Dose}\\[0.3cm]
+{\large Source Eur152 - Cône 60° -25 Millions d'Événements}\\[0.3cm]
+{\color{Carnelian}\rule{\linewidth}{2pt}}
+}
+\title{\textbf{Analyse des Méthodes de Calcul du dose\\dans une Simulation Geant4}\\[0.5cm]
+\large Source Europium-152 -- Détecteur dans l'air à 20 cm -- plaque intermédiaire W/PETG (7mm) - Inox (5mm) - W/PETG (7mm)}
+\author{Documentation technique}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Ce document présente une analyse comparative de méthodes de calcul grandeurs radiométriques (débit de Kerma, débit de dose dans des tissus mous),  implémentées dans la simulation Geant4 d'une source d'Europium-152.\newline La première méthode repose sur le dépôt d'énergie Monte Carlo, tandis que la seconde utilise le calcul par fluence avec les coefficients d'absorption d'énergie tabulés. Cette analyse inclut les fondements théoriques, l'implémentation informatique et les conditions de validité de chaque approche.
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+%==============================================================================
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\section{\Large \color{blue} \textbf{Configuration de la simulation}\color{black}}
+\end{mdframed}
+\footnotesize
+%==============================================================================
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue,title=\textbf{Nouvelle Configuration}]
+\noindent ${\rm \; \; \; \; \; \; \; \;}$ \; \textbf{-} \; la \color{blue}\textbf{plaque intermediaire}\color{black} \; a une épaisseur de 18 mm\newline
+\noindent ${\rm \; \; \; \; \; \; \; \;}$ \; \textbf{-} \; la \color{blue}\textbf{plaque intermediaire}\color{black} \; est un sandwitch de W/PETG (7 mm), Inox (5 mm) et W/PETG (7mm)\newline
+\noindent ${\rm \; \; \; \; \; \; \; \;}$ \; \textbf{-} \; Son centre est en $\bm{z}$ = 4.65 cm (2.65 cm de la source)\newline
+\noindent ${\rm \; \; \; \; \; \; \; \;}$ \; \textbf{-} \; Les \color{blue}\textbf{plans de comptage}\color{black} \; sont distant de $\bm{z}$ = 2mm des faces avants et arriéres de la plaque\newline
+\noindent ${\rm \; \; \; \; \; \; \; \;}$ \; \textbf{-} \; Le centre du \color{blue}\textbf{détecteur sphèrique}\color{black} \; (matériau = Water) est a une distance de 20 cm de la face arrière de la plaque 
+\end{tcolorbox}
+
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Vue d'Ensemble -- Coupe Longitudinale}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+
+% ============================================================================
+% TITRE
+% ============================================================================
+\node[font=\large\bfseries] at (6,8.5) {Coupe Longitudinale du Système de Blindage};
+
+% ============================================================================
+% AXE Z (horizontal)
+% ============================================================================
+\draw[->,thick] (-1,0) -- (14,0) node[right] {$z$ (cm)};
+\foreach \x in {0,4,8,12,16,20} {
+    \draw (\x,0.1) -- (\x,-0.1) node[below] {\x};
+}
+
+% ============================================================================
+% SOURCE Eu-152 (à z = 2 cm)
+% ============================================================================
+\filldraw[fill=source, draw=black, thick] (2,3.5) circle (0.3);
+\node[above=0.4cm, font=\bfseries] at (2,3.5) {Source Eu-152};
+\node[below=0.1cm, font=\small] at (2,3.2) {$z = 2$ cm};
+\node[below=0.5cm, font=\small] at (2,3.2) {$A = 44$ kBq};
+
+% Émission conique (60°)
+\draw[gamma, thick, dashed] (2,3.5) -- (3.75,5.5);
+\draw[gamma, thick, dashed] (2,3.5) -- (3.75,1.5);
+\draw[gamma, thick, ->] (2,3.5) -- (3.5,3.5);
+\draw[gamma, thick, ->] (2,3.5) -- (3.4,4.2);
+\draw[gamma, thick, ->] (2,3.5) -- (3.4,2.8);
+
+% Arc pour montrer l'angle
+\draw[thick] (2.8,3.5) arc (0:30:0.8) node[midway, right, font=\small] {60°};
+\draw[thick] (2.8,3.5) arc (0:-30:0.8);
+
+% ============================================================================
+% SANDWICH : W/PETG (7mm) + INOX (4mm) + W/PETG (7mm)
+% Position : face avant z = 3.75 cm, face arrière z = 5.55 cm
+% ============================================================================
+
+% Dimensions verticales du sandwich
+\def\sandwichbottom{1.0}
+\def\sandwichtop{6.0}
+\def\sandwichheight{5.0}
+
+% Positions en z (échelle : 1 cm réel = 1 unité TikZ)
+\def\frontface{3.75}
+\def\wpetgone{4.45}      % fin W/PETG avant
+\def\inoxend{4.85}       % fin Inox
+\def\backface{5.55}      % fin W/PETG arrière
+
+% --- Couche 1 : W/PETG avant (7 mm) ---
+\fill[wpetg!70, draw=black, thick] 
+    (\frontface,\sandwichbottom) rectangle (\wpetgone,\sandwichtop);
+\node[white, font=\bfseries, rotate=90] at ({(\frontface+\wpetgone)/2},3.5) {W/PETG};
+
+% --- Couche 2 : INOX (4 mm) ---
+\fill[inox, draw=black, thick] 
+    (\wpetgone,\sandwichbottom) rectangle (\inoxend,\sandwichtop);
+\node[black, font=\bfseries, rotate=90] at ({(\wpetgone+\inoxend)/2},3.5) {INOX};
+
+% --- Couche 3 : W/PETG arrière (7 mm) ---
+\fill[wpetg!70, draw=black, thick] 
+    (\inoxend,\sandwichbottom) rectangle (\backface,\sandwichtop);
+\node[white, font=\bfseries, rotate=90] at ({(\inoxend+\backface)/2},3.5) {W/PETG};
+
+% ============================================================================
+% COTES ET DIMENSIONS
+% ============================================================================
+
+% Accolade supérieure pour épaisseur totale
+\draw[decorate, decoration={brace, amplitude=8pt, raise=3pt}, thick]
+    (\frontface,\sandwichtop) -- (\backface,\sandwichtop)
+    node[midway, above=12pt, font=\bfseries] {18 mm};
+
+% Cotes individuelles (en bas)
+\draw[decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, thick]
+    (\frontface,\sandwichbottom) -- (\wpetgone,\sandwichbottom)
+    node[midway, below=10pt, font=\small] {7 mm};
+
+\draw[decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, thick]
+    (\wpetgone,\sandwichbottom) -- (\inoxend,\sandwichbottom)
+    node[midway, below=10pt, font=\small] {4 mm};
+
+\draw[decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, thick]
+    (\inoxend,\sandwichbottom) -- (\backface,\sandwichbottom)
+    node[midway, below=10pt, font=\small] {7 mm};
+
+% Positions z
+\draw[dashed, gray] (\frontface,0) -- (\frontface,\sandwichbottom);
+\node[below, font=\scriptsize, gray] at (\frontface,-0.3) {3.75};
+
+\draw[dashed, gray] (\backface,0) -- (\backface,\sandwichbottom);
+\node[below, font=\scriptsize, gray] at (\backface,-0.3) {5.55};
+
+% ============================================================================
+% DÉTECTEUR (Sphère d'eau à z = 20 cm)
+% ============================================================================
+\def\detectorz{12}  % Position réduite pour le dessin (représente z=20cm)
+\def\detectorradius{1.0}
+
+\filldraw[fill=water!50, draw=blue!70!black, thick] 
+    (\detectorz,3.5) circle (\detectorradius);
+\node[font=\bfseries, blue!70!black] at (\detectorz,3.5) {H$_2$O};
+\node[below=1.2cm, font=\small] at (\detectorz,3.5) {$z = 20$ cm};
+\node[below=1.7cm, font=\small] at (\detectorz,3.5) {$r = 2$ cm};
+
+% Flèche indiquant la distance
+\draw[<->, thick, gray] (5.55,7) -- (12,7) 
+    node[midway, above, font=\small] {14.45 cm};
+
+% ============================================================================
+% LÉGENDE
+% ============================================================================
+\node[anchor=north west] at (0,-1.5) {
+    \begin{tikzpicture}[scale=0.8]
+        % Légende W/PETG
+        \fill[wpetg!70] (0,0) rectangle (0.5,0.4);
+        \draw[black] (0,0) rectangle (0.5,0.4);
+        \node[right, font=\small] at (0.6,0.2) {W/PETG 75\%/25\% ($\bm{\rho} = 4.24$ g/cm$^3$, $\bm{Z_{\text{eff}}} \approx 65$)};
+        
+        % Légende Inox
+        \fill[inox] (0,-0.6) rectangle (0.5,-0.2);
+        \draw[black] (0,-0.6) rectangle (0.5,-0.2);
+        \node[right, font=\small] at (0.6,-0.4) {Inox 304 ($\bm{\rho} = 8.0$ g/cm$^3$, $\bm{Z_{\text{eff}}} \approx 26$)};
+        
+        % Légende Eau
+        \fill[water!50] (0,-1.2) rectangle (0.5,-0.8);
+        \draw[blue!70!black] (0,-1.2) rectangle (0.5,-0.8);
+        \node[right, font=\small] at (0.6,-1.0) {Détecteur eau ($\bm{\rho} = 1.0$ g/cm$^3$)};
+        
+        % Légende Source
+        \filldraw[fill=source, draw=black] (0.25,-1.6) circle (0.15);
+        \node[right, font=\small] at (0.6,-1.6) {Source Eu-152 (cône 60°)};
+    \end{tikzpicture}
+};
+
+\end{tikzpicture}
+\captionsetup{labelformat=empty}
+\caption{\footnotesize Coupe longitudinale du système de blindage sandwich W/PETG + Inox + W/PETG. La source Eu-152 émet des gammas dans un cône de 60° vers le détecteur sphérique d'eau situé à $\bm{z} = 20$ cm.}
+\end{figure}
+
+\newpage
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Paramètres géométriques de la simulation}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{table}[h!]
+\centering
+\captionsetup{labelformat=empty}
+\caption{\footnotesize Propriétés des couches du sandwich}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\footnotesize \textbf{Couche}&\footnotesize \textbf{Matériau}&\footnotesize \textbf{Épaisseur}&\footnotesize \textbf{Densité}&\footnotesize \textbf{Masse surf.} \\
+ & &\footnotesize  (mm) &\footnotesize  (g/cm$^3$) &\footnotesize  (g/cm$^2$) \\
+\midrule
+\footnotesize 1 (avant)&\footnotesize W/PETG 75/25&\footnotesize 7.0&\footnotesize 4.24&\footnotesize  2.97 \\
+\footnotesize 2 (centre)&\footnotesize Inox 304&\footnotesize 4.0&\footnotesize 8.00&\footnotesize  3.20 \\
+\footnotesize 3 (arrière)&\footnotesize W/PETG 75/25&\footnotesize 7.0&\footnotesize 4.24&\footnotesize  2.97 \\
+\midrule
+\footnotesize \textbf{Total}&\footnotesize  --&\footnotesize \textbf{18.0}&\footnotesize -- &\footnotesize  \textbf{9.14} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%==============================================================================
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\section{\Large \color{blue} \textbf{Résultats de Simulation}\color{black}}
+\end{mdframed}
+\footnotesize
+%==============================================================================
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Statistiques de génération}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{table}[h!]
+\centering
+\captionsetup{labelformat=empty}
+\caption{\footnotesize Validation de la génération des gammas primaires}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\footnotesize \textbf{Paramètre}&\footnotesize \textbf{Simulé}&\footnotesize \textbf{Théorie} \\
+\midrule
+\footnotesize Gammas générés&\footnotesize 48\,102\,176&\footnotesize  -- \\
+\footnotesize Moyenne $\bm{\gamma}$/événement&\footnotesize  1.9241&\footnotesize 1.924 \\
+\footnotesize Événements avec $\bm{N_\gamma} = 0$&\footnotesize  11.07\%&\footnotesize $\sim$11.7\% \\
+\footnotesize Gammas atteignant détecteur&\footnotesize  198\,786&\footnotesize 588\,411 (géom.) \\
+\footnotesize Transmission &\footnotesize 33.8\%&\footnotesize  -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Méthode 1 : Dépôt d'énergie Monte-Carlo direct}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\noindent Somme de l'énergie déposée par toutes les particules (gammas, électrons) dans le volume d'eau :
+
+\begin{equation*}
+\bm{\dot{D}_1} = \frac{\bm{E_{\text{déposée}}}}{\bm{m_{\text{eau}}} \times \bm{t_{\text{simulé}}}} \times \bm{f_{\text{corr}}}
+\end{equation*}
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Méthode 1bis : Forçage d'interaction}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\noindent Pour chaque gamma traversant le détecteur, calcul de l'énergie déposée théorique :
+
+\begin{equation*}
+\bm{\dot{D}_{1\text{bis}}} = \frac{\bm{1}}{\bm{m_{\text{eau}}} \times \bm{t}} \sum_i \bm{E_i} \times \bm{L_i} \times \left(\frac{\bm{\mu_{\text{en}}}}{\bm{\rho}}\right)_{\bm{E_i}} \times \bm{\rho_{\text{eau}}} \times \bm{f_{\text{corr}}}
+\end{equation*}
+
+\noindent où $\bm{L_i}$ est la longueur de corde du gamma $i$ dans la sphère.
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Méthode 2 : Fluence spectrale}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\noindent Équivalente à la méthode 1bis, utilisant les coefficients de conversion fluence-dose :
+\begin{equation*}
+\bm{\dot{D}_2} = \sum_i \bm{\Phi_i} \times \bm{h_K(E_i)} \times \bm{f_{\text{corr}}}
+\end{equation*}
+
+\vspace{0.5cm}
+\noindent\textit{Note : .}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue,title=\textbf{Note}]
+\noindent Les méthodes 1bis et 2 donnent des résultats identiques car elles utilisent la même formulation analytique. La méthode 1 (MC direct) présente plus de fluctuations statistiques
+\end{tcolorbox}
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Débits de dose simulés}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{table}[h!]
+\centering
+\captionsetup{labelformat=empty}
+\caption{\footnotesize Débits de dose dans le détecteur eau (3 méthodes)}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\footnotesize \textbf{Méthode} &\footnotesize \textbf{Débit brut} &\footnotesize \textbf{Débit corrigé} &\footnotesize \textbf{Incertitude} \\
+ &\footnotesize (nGy/h) &\footnotesize (nGy/h) &\footnotesize (nGy/h) \\
+\midrule
+\footnotesize \textbf{1 - MC direct}&\footnotesize 412.46&\footnotesize \textbf{103.12}&\footnotesize $\pm$ 0.69 \\
+\footnotesize \textbf{1bis - Forçage}&\footnotesize 430.01&\footnotesize \textbf{107.50}&\footnotesize $\pm$ 0.24 \\
+\footnotesize \textbf{2 - Fluence}&\footnotesize 430.01&\footnotesize \textbf{107.50}&\footnotesize $\pm$ 0.24 \\
+\midrule
+\footnotesize \textit{Théorique (sans écran)} &\footnotesize -- & \textit{174.8} &\footnotesize -- \\
+\bottomrule 
+\end{tabular}
+\end{table}
+
+%==============================================================================
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\section{\Large \color{blue} \textbf{Analyse de l'Atténuation}\color{black}}
+\end{mdframed}
+\footnotesize
+%==============================================================================
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Facteurs d'atténuation par rapport à la théorie sans écran}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\noindent Le débit théorique sans écran est calculé par :
+
+\begin{equation*}
+\bm{\dot{K}_{\text{théo}}} = \frac{\bm{\Gamma} \times \bm{A}}{\bm{d^2}} = \frac{\bm{0.13}~\bm{\mu}\bm{\text{Gy}}\cdot\bm{\text{m}^2}/(\bm{\text{h}}\cdot\bm{\text{MBq}}) \times \bm{0.044}~\bm{\text{MBq}}}{(\bm{0.18}~\bm{\text{m}})^2} \approx \SI{176}{\nano\gray\per\hour}
+\end{equation*}
+
+\begin{table}[h!]
+\centering
+\captionsetup{labelformat=empty}
+\caption{\footnotesize Facteurs d'atténuation des deux configurations}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\footnotesize\textbf{Configuration} &\footnotesize \textbf{Débit (nGy/h)}&\footnotesize \textbf{Facteur d'atténuation}&\footnotesize \textbf{Atténuation (\%)} \\
+\midrule
+\footnotesize Sans écran (théorie)&\footnotesize 174.8&\footnotesize 1.000&\footnotesize 0\% \\
+\footnotesize W/PETG homogène&\footnotesize 110.96&\footnotesize 0.635&\footnotesize 36.5\% \\
+\footnotesize Sandwich Inox&\footnotesize 107.50&\footnotesize 0.615&\footnotesize 38.5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Comparaison directe des deux écrans}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{equation*}
+\bm{\text{Rapport}} = \frac{\bm{\dot{D}_{\text{Sandwich}}}}{\bm{\dot{D}_{\text{W/PETG}}}} = \frac{\bm{107.50}}{\bm{110.96}} = \bm{0.969} \pm \bm{0.003}
+\end{equation*}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue,title=\textbf{Interprétation}]
+\noindent Le sandwich W/PETG + Inox + W/PETG atténue \textbf{3.1\% de plus} que la plaque W/PETG homogène
+\end{tcolorbox}
+
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Analyse physique}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\subsubsection{Pourquoi le sandwich atténue légèrement plus ?}
+
+\begin{enumerate}
+\item \textbf{Masse surfacique plus élevée :}
+\begin{itemize}
+\item W/PETG homogène : \SI{7.63}{\gram\per\square\centi\meter}
+\item Sandwich : \SI{9.14}{\gram\per\square\centi\meter} (+20\%)
+\end{itemize}
+    
+\item \textbf{Densité de l'Inox :}
+\begin{itemize}
+\item L'Inox (\SI{8.0}{\gram\per\cubic\centi\meter}) est presque 2× plus dense que le W/PETG (\SI{4.24}{\gram\per\cubic\centi\meter})
+\item Compense partiellement le Z plus faible ($\bm{Z_{\text{Inox}}} \approx 26$ vs $\bm{Z_W} = 74$)
+\end{itemize}
+    
+\item \textbf{Effet du Z sur l'atténuation :}
+\begin{itemize}
+\item Basse énergie ($< \SI{100}{\kilo\electronvolt}$) : effet photoélectrique $\propto \bm{Z^{4-5}}$ $\Rightarrow$ W/PETG meilleur
+\item Moyenne énergie (\SI{200}-\SI{500}{\kilo\electronvolt}) : Compton $\propto$ densité électronique $\Rightarrow$ Inox compétitif
+\item Haute énergie ($> \SI{1}{\mega\electronvolt}$) : densité domine $\Rightarrow$ Inox légèrement meilleur
+\end{itemize}
+\end{enumerate}
+
+\subsubsection{Bilan pour le spectre Eu-152}
+
+\noindent Le spectre Eu-152 contient des contributions significatives à toutes les énergies :
+\begin{itemize}
+\item Basse énergie (40 keV) : 58.5\% d'intensité $\Rightarrow$ W/PETG plus efficace
+\item Moyenne énergie (122-444 keV) : 65.1\% d'intensité $\Rightarrow$ équivalent
+\item Haute énergie (778-1408 keV) : 66.3\% d'intensité $\Rightarrow$ Inox légèrement meilleur
+\end{itemize}
+
+\noindent Le gain de masse surfacique (+20\%) compense les pertes à basse énergie, résultant en une atténuation globale légèrement supérieure (+3.1\%).
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Facteurs d'atténuation par rapport à la théorie sans écran}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{table}[h!]
+\centering
+\captionsetup{labelformat=empty}
+\caption{\footnotesize \footnotesize Statistiques de transmission vers le détecteur}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\footnotesize\textbf{Paramètre} &\footnotesize \textbf{W/PETG} &\footnotesize \textbf{Sandwich Inox} \\
+\midrule
+\footnotesize Gammas entrants (observés) &\footnotesize 198\,755 &\footnotesize 198\,786 \\
+\footnotesize Gammas attendus (géométrique) &\footnotesize 588\,218 &\footnotesize 588\,411 \\
+\footnotesize Fraction du cône &\footnotesize 0.413\% &\footnotesize 0.413\% \\
+\footnotesize Transmission apparente &\footnotesize 33.8\% &\footnotesize 33.8\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue,title=\textbf{Remarque}]
+\noindent Le nombre de gammas atteignant le détecteur est quasi-identique pour les deux configurations. La différence de dose provient principalement du \color{blue}\textbf{spectre énergétique}\color{black} \; des gammas transmis, pas de leur nombre
+\end{tcolorbox}
+
+%==============================================================================
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\section{\Large \color{blue} \textbf{Synthèse et Conclusions}\color{black}}
+\end{mdframed}
+\footnotesize
+%==============================================================================
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Résumé des résultats}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{table}[h!]
+\centering
+\captionsetup{labelformat=empty}
+\caption{\footnotesize Tableau récapitulatif de comparaison}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\footnotesize \textbf{Paramètre} &\footnotesize \textbf{W/PETG homogène} &\footnotesize \textbf{Sandwich Inox} \\
+\midrule
+\footnotesize Épaisseur totale&\footnotesize \SI{18}{\milli\meter}&\footnotesize \SI{18}{\milli\meter} \\
+\footnotesize Masse surfacique&\footnotesize \SI{7.63}{\gram\per\square\centi\meter}&\footnotesize \SI{9.14}{\gram\per\square\centi\meter} \\
+\footnotesize Débit de dose&\footnotesize $110.96 \pm 0.25$ nGy/h&\footnotesize $107.50 \pm 0.24$ nGy/h \\
+\footnotesize Atténuation vs théorie&\footnotesize 36.5\%&\footnotesize 38.5\% \\
+\midrule
+\footnotesize\textbf{Gain relatif}&\footnotesize Référence&\footnotesize \textbf{+3.1\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Conclusions}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\begin{enumerate}
+\item \color{blue}\textbf{Cohérence des simulations :}\color{black} \; Les deux simulations sont \color{blue}\textbf{parfaitement cohérentes}\color{black} \; avec les statistiques de génération Eu-152 attendues.
+\item \color{blue}\textbf{Atténuation comparable :}\color{black} Le sandwich W/PETG + Inox + W/PETG offre une atténuation \color{blue}\textbf{légèrement supérieure}\color{black} \; (+3.1\%) à la plaque W/PETG homogène.
+\item \color{blue}\textbf{Effet de masse :}\color{black} \; Le gain d'atténuation est principalement dû à la \color{blue}\textbf{masse surfacique plus élevée}\color{black} (+20\%) du sandwich, et non au numéro atomique de l'Inox.
+\item \color{blue}\textbf{Compromis :}\color{black} \; À masse égale, le W/PETG homogène serait probablement plus efficace grâce au Z élevé du tungstène. Le choix du sandwich peut être motivé par des considérations \color{blue}\textbf{mécaniques}\color{black} \; (rigidité) ou \color{blue}\textbf{économiques}\color{black} \; (coût de l'Inox vs W).
+\end{enumerate}
+
+\normalsize
+\noindent \begin{mdframed}[backgroundcolor=orange!20]
+\subsection{\color{blue}\textbf{Recommandations}\color{black}}
+\end{mdframed}
+\footnotesize
+
+\noindent Pour \color{blue}\textbf{améliorer l'atténuation}\color{black} \; du sandwich tout en conservant la structure, remplacer l'Inox par :
+\begin{itemize}
+\item \color{blue}\textbf{Bismuth}\color{black} \; (Z=83) : densité \SI{9.78}{\gram\per\cubic\centi\meter}, non toxique
+\item \color{blue}\textbf{Tungstène pur}\color{black} \; (Z=74) : densité \SI{19.3}{\gram\per\cubic\centi\meter}, maximal
+\item \color{blue}\textbf{Poudre de Bi tassée}\color{black} \; (70\%) : densité $\sim$\SI{6.85}{\gram\per\cubic\centi\meter}, pratique
+\end{itemize}
+
+\end{document}
