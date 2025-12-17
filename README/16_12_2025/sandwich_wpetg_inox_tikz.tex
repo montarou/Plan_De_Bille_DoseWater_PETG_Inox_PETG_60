@@ -1,0 +1,310 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{fancybox}
+
+\usetikzlibrary{patterns,arrows.meta,decorations.pathreplacing,calc,positioning,shapes.geometric}
+
+\geometry{margin=2.5cm}
+
+\definecolor{wpetg}{RGB}{34,139,34}      % Vert forêt pour W/PETG
+\definecolor{inox}{RGB}{192,192,192}     % Gris argent pour Inox
+\definecolor{water}{RGB}{100,149,237}    % Bleu pour eau
+\definecolor{source}{RGB}{255,215,0}     % Or pour source
+\definecolor{gamma}{RGB}{255,69,0}       % Orange-rouge pour gammas
+
+\title{\textbf{Écran de Protection Sandwich}\\[0.5cm]
+\Large W/PETG + Inox + W/PETG\\[0.3cm]
+\normalsize Configuration et Résultats de Simulation Geant4}
+
+\author{Simulation Monte-Carlo - Eu-152}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+%==============================================================================
+\section{Configuration Géométrique}
+%==============================================================================
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=1.0, >=Stealth]
+
+% ============================================================================
+% TITRE
+% ============================================================================
+\node[font=\large\bfseries] at (6,8.5) {Coupe Longitudinale du Système de Blindage};
+
+% ============================================================================
+% AXE Z (horizontal)
+% ============================================================================
+\draw[->,thick] (-1,0) -- (14,0) node[right] {$z$ (cm)};
+\foreach \x in {0,2,4,6,8,10,12} {
+    \draw (\x,0.1) -- (\x,-0.1) node[below] {\x};
+}
+
+% ============================================================================
+% SOURCE Eu-152 (à z = 2 cm)
+% ============================================================================
+\filldraw[fill=source, draw=black, thick] (2,3.5) circle (0.3);
+\node[above=0.4cm, font=\bfseries] at (2,3.5) {Source Eu-152};
+\node[below=0.1cm, font=\small] at (2,3.2) {$z = 2$ cm};
+\node[below=0.5cm, font=\small] at (2,3.2) {$A = 44$ kBq};
+
+% Émission conique (60°)
+\draw[gamma, thick, dashed] (2,3.5) -- (3.75,5.5);
+\draw[gamma, thick, dashed] (2,3.5) -- (3.75,1.5);
+\draw[gamma, thick, ->] (2,3.5) -- (3.5,3.5);
+\draw[gamma, thick, ->] (2,3.5) -- (3.4,4.2);
+\draw[gamma, thick, ->] (2,3.5) -- (3.4,2.8);
+
+% Arc pour montrer l'angle
+\draw[thick] (2.8,3.5) arc (0:30:0.8) node[midway, right, font=\small] {60°};
+\draw[thick] (2.8,3.5) arc (0:-30:0.8);
+
+% ============================================================================
+% SANDWICH : W/PETG (7mm) + INOX (4mm) + W/PETG (7mm)
+% Position : face avant z = 3.75 cm, face arrière z = 5.55 cm
+% ============================================================================
+
+% Dimensions verticales du sandwich
+\def\sandwichbottom{1.0}
+\def\sandwichtop{6.0}
+\def\sandwichheight{5.0}
+
+% Positions en z (échelle : 1 cm réel = 1 unité TikZ)
+\def\frontface{3.75}
+\def\wpetgone{4.45}      % fin W/PETG avant
+\def\inoxend{4.85}       % fin Inox
+\def\backface{5.55}      % fin W/PETG arrière
+
+% --- Couche 1 : W/PETG avant (7 mm) ---
+\fill[wpetg!70, draw=black, thick] 
+    (\frontface,\sandwichbottom) rectangle (\wpetgone,\sandwichtop);
+\node[white, font=\bfseries, rotate=90] at ({(\frontface+\wpetgone)/2},3.5) {W/PETG};
+
+% --- Couche 2 : INOX (4 mm) ---
+\fill[inox, draw=black, thick] 
+    (\wpetgone,\sandwichbottom) rectangle (\inoxend,\sandwichtop);
+\node[black, font=\bfseries, rotate=90] at ({(\wpetgone+\inoxend)/2},3.5) {INOX};
+
+% --- Couche 3 : W/PETG arrière (7 mm) ---
+\fill[wpetg!70, draw=black, thick] 
+    (\inoxend,\sandwichbottom) rectangle (\backface,\sandwichtop);
+\node[white, font=\bfseries, rotate=90] at ({(\inoxend+\backface)/2},3.5) {W/PETG};
+
+% ============================================================================
+% COTES ET DIMENSIONS
+% ============================================================================
+
+% Accolade supérieure pour épaisseur totale
+\draw[decorate, decoration={brace, amplitude=8pt, raise=3pt}, thick]
+    (\frontface,\sandwichtop) -- (\backface,\sandwichtop)
+    node[midway, above=12pt, font=\bfseries] {18 mm};
+
+% Cotes individuelles (en bas)
+\draw[decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, thick]
+    (\frontface,\sandwichbottom) -- (\wpetgone,\sandwichbottom)
+    node[midway, below=10pt, font=\small] {7 mm};
+
+\draw[decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, thick]
+    (\wpetgone,\sandwichbottom) -- (\inoxend,\sandwichbottom)
+    node[midway, below=10pt, font=\small] {4 mm};
+
+\draw[decorate, decoration={brace, amplitude=5pt, mirror, raise=3pt}, thick]
+    (\inoxend,\sandwichbottom) -- (\backface,\sandwichbottom)
+    node[midway, below=10pt, font=\small] {7 mm};
+
+% Positions z
+\draw[dashed, gray] (\frontface,0) -- (\frontface,\sandwichbottom);
+\node[below, font=\scriptsize, gray] at (\frontface,-0.3) {3.75};
+
+\draw[dashed, gray] (\backface,0) -- (\backface,\sandwichbottom);
+\node[below, font=\scriptsize, gray] at (\backface,-0.3) {5.55};
+
+% ============================================================================
+% DÉTECTEUR (Sphère d'eau à z = 20 cm)
+% ============================================================================
+\def\detectorz{12}  % Position réduite pour le dessin (représente z=20cm)
+\def\detectorradius{1.0}
+
+\filldraw[fill=water!50, draw=blue!70!black, thick] 
+    (\detectorz,3.5) circle (\detectorradius);
+\node[font=\bfseries, blue!70!black] at (\detectorz,3.5) {H$_2$O};
+\node[below=1.2cm, font=\small] at (\detectorz,3.5) {$z = 20$ cm};
+\node[below=1.7cm, font=\small] at (\detectorz,3.5) {$r = 2$ cm};
+
+% Flèche indiquant la distance
+\draw[<->, thick, gray] (5.55,7) -- (12,7) 
+    node[midway, above, font=\small] {14.45 cm};
+
+% ============================================================================
+% LÉGENDE
+% ============================================================================
+\node[anchor=north west] at (0,-1.5) {
+    \begin{tikzpicture}[scale=0.8]
+        % Légende W/PETG
+        \fill[wpetg!70] (0,0) rectangle (0.5,0.4);
+        \draw[black] (0,0) rectangle (0.5,0.4);
+        \node[right, font=\small] at (0.6,0.2) {W/PETG 75\%/25\% ($\rho = 4.24$ g/cm$^3$, Z$_{\text{eff}} \approx 65$)};
+        
+        % Légende Inox
+        \fill[inox] (0,-0.6) rectangle (0.5,-0.2);
+        \draw[black] (0,-0.6) rectangle (0.5,-0.2);
+        \node[right, font=\small] at (0.6,-0.4) {Inox 304 ($\rho = 8.0$ g/cm$^3$, Z$_{\text{eff}} \approx 26$)};
+        
+        % Légende Eau
+        \fill[water!50] (0,-1.2) rectangle (0.5,-0.8);
+        \draw[blue!70!black] (0,-1.2) rectangle (0.5,-0.8);
+        \node[right, font=\small] at (0.6,-1.0) {Détecteur eau ($\rho = 1.0$ g/cm$^3$)};
+        
+        % Légende Source
+        \filldraw[fill=source, draw=black] (0.25,-1.6) circle (0.15);
+        \node[right, font=\small] at (0.6,-1.6) {Source Eu-152 (cône 60°)};
+    \end{tikzpicture}
+};
+
+\end{tikzpicture}
+\caption{Coupe longitudinale du système de blindage sandwich W/PETG + Inox + W/PETG. La source Eu-152 émet des gammas dans un cône de 60° vers le détecteur sphérique d'eau situé à $z = 20$ cm.}
+\label{fig:coupe}
+\end{figure}
+
+%==============================================================================
+\section{Caractéristiques du Sandwich}
+%==============================================================================
+
+\begin{table}[h!]
+\centering
+\caption{Propriétés des couches du sandwich}
+\label{tab:couches}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Couche} & \textbf{Matériau} & \textbf{Épaisseur} & \textbf{Densité} & \textbf{Masse surf.} \\
+ & & (mm) & (g/cm$^3$) & (g/cm$^2$) \\
+\midrule
+1 (avant) & W/PETG 75/25 & 7.0 & 4.24 & 2.97 \\
+2 (centre) & Inox 304 & 4.0 & 8.00 & 3.20 \\
+3 (arrière) & W/PETG 75/25 & 7.0 & 4.24 & 2.97 \\
+\midrule
+\textbf{Total} & -- & \textbf{18.0} & -- & \textbf{9.14} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%==============================================================================
+\section{Résultats de Simulation}
+%==============================================================================
+
+\subsection{Paramètres de la simulation}
+
+\begin{table}[h!]
+\centering
+\caption{Paramètres de la simulation Geant4}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Paramètre} & \textbf{Valeur} \\
+\midrule
+Code & Geant4 11.03-patch-01 \\
+Physique EM & Livermore (basse énergie) \\
+Nombre d'événements & $25 \times 10^6$ \\
+Source & Eu-152 (spectre complet 12 raies) \\
+Activité & 44 kBq \\
+Mode d'émission & Cône de 60° \\
+Temps simulé & 568.18 s (0.158 h) \\
+Facteur de correction & $f_{\text{corr}} = 0.25$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Statistiques de génération}
+
+\begin{table}[h!]
+\centering
+\caption{Validation de la génération des gammas primaires}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Paramètre} & \textbf{Simulé} & \textbf{Théorie} \\
+\midrule
+Gammas générés & 48\,102\,176 & -- \\
+Moyenne $\gamma$/événement & 1.9241 & 1.924 \\
+Événements avec $N_\gamma = 0$ & 11.07\% & $\sim$11.7\% \\
+Gammas atteignant détecteur & 198\,786 & 588\,411 (géom.) \\
+Transmission & 33.8\% & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Débits de dose simulés}
+
+\begin{table}[h!]
+\centering
+\caption{Débits de dose dans le détecteur eau (3 méthodes)}
+\label{tab:dose}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Méthode} & \textbf{Débit brut} & \textbf{Débit corrigé} & \textbf{Incertitude} \\
+ & (nGy/h) & (nGy/h) & (nGy/h) \\
+\midrule
+\textbf{1 - MC direct} & 412.46 & \textbf{103.12} & $\pm$ 0.69 \\
+\textbf{1bis - Forçage} & 430.01 & \textbf{107.50} & $\pm$ 0.24 \\
+\textbf{2 - Fluence} & 430.01 & \textbf{107.50} & $\pm$ 0.24 \\
+\midrule
+\textit{Théorique (sans écran)} & -- & \textit{174.8} & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\centering
+\textbf{Résultat principal}\\[0.3cm]
+\large
+$\dot{D}_{\text{sandwich}} = 107.50 \pm 0.24$ nGy/h\\[0.2cm]
+\normalsize
+\textbf{Facteur d'atténuation :} $\displaystyle \frac{\dot{D}_{\text{sandwich}}}{\dot{D}_{\text{théo}}} = \frac{107.50}{174.8} = 0.615$\\[0.2cm]
+\textbf{Atténuation :} 38.5\%
+}}
+\end{center}
+
+%==============================================================================
+\section{Description des Méthodes de Calcul}
+%==============================================================================
+
+\subsection{Méthode 1 : Dépôt d'énergie Monte-Carlo direct}
+
+Somme de l'énergie déposée par toutes les particules (gammas, électrons) dans le volume d'eau :
+\begin{equation}
+\dot{D}_1 = \frac{E_{\text{déposée}}}{m_{\text{eau}} \times t_{\text{simulé}}} \times f_{\text{corr}}
+\end{equation}
+
+\subsection{Méthode 1bis : Forçage d'interaction}
+
+Pour chaque gamma traversant le détecteur, calcul de l'énergie déposée théorique :
+\begin{equation}
+\dot{D}_{1\text{bis}} = \frac{1}{m_{\text{eau}} \times t} \sum_i E_i \times L_i \times \left(\frac{\mu_{\text{en}}}{\rho}\right)_{E_i} \times \rho_{\text{eau}} \times f_{\text{corr}}
+\end{equation}
+où $L_i$ est la longueur de corde du gamma $i$ dans la sphère.
+
+\subsection{Méthode 2 : Fluence spectrale}
+
+Équivalente à la méthode 1bis, utilisant les coefficients de conversion fluence-dose :
+\begin{equation}
+\dot{D}_2 = \sum_i \Phi_i \times h_K(E_i) \times f_{\text{corr}}
+\end{equation}
+
+\vspace{0.5cm}
+\noindent\textit{Note : Les méthodes 1bis et 2 donnent des résultats identiques car elles utilisent la même formulation analytique. La méthode 1 (MC direct) présente plus de fluctuations statistiques.}
+
+\end{document}
